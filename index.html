@@ -1,1 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Congrats Dishita! 🎉</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .floating-emoji {
+            position: absolute;
+            font-size: 60px;
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(-20px) translateX(-10px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(20px) translateX(10px) rotate(10deg);
+            }
+        }
+
+        .emoji1 { left: 10%; top: 20%; font-size: 60px; animation-delay: 0s; }
+        .emoji2 { left: 85%; top: 15%; font-size: 40px; animation-delay: 0.2s; }
+        .emoji3 { left: 75%; top: 60%; font-size: 55px; animation-delay: 0.4s; }
+        .emoji4 { left: 15%; top: 70%; font-size: 65px; animation-delay: 0.1s; }
+        .emoji5 { left: 50%; top: 10%; font-size: 35px; animation-delay: 0.3s; }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        .landing-view {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.5s ease;
+        }
+
+        .landing-view.hide {
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+        }
+
+        .message-view {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+            position: absolute;
+            max-width: 600px;
+            pointer-events: none;
+        }
+
+        .message-view.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ec4899;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .gift-button {
+            padding: 20px 40px;
+            background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .gift-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 35px rgba(236, 72, 153, 0.4);
+        }
+
+        .gift-button:active {
+            transform: scale(0.9);
+        }
+
+        .message-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .message-card h2 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ec4899;
+            margin-bottom: 1.5rem;
+        }
+
+        .message-card p {
+            font-size: 1.25rem;
+            color: #374151;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .message-card .italic-text {
+            font-style: italic;
+            color: #ec4899;
+            margin-bottom: 1rem;
+        }
+
+        .message-card .final-text {
+            font-size: 1.75rem;
+            font-weight: bold;
+            color: #374151;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .gift-button {
+                font-size: 1.2rem;
+                padding: 15px 30px;
+            }
+
+            .message-card {
+                padding: 2rem;
+            }
+
+            .message-card h2 {
+                font-size: 1.8rem;
+            }
+
+            .message-card p {
+                font-size: 1rem;
+            }
+
+            .floating-emoji {
+                font-size: 30px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Emojis -->
+    <div class="floating-emoji emoji1">🎁</div>
+    <div class="floating-emoji emoji2">✨</div>
+    <div class="floating-emoji emoji3">🎀</div>
+    <div class="floating-emoji emoji4">🎈</div>
+    <div class="floating-emoji emoji5">⭐</div>
+
+    <!-- Landing View -->
+    <div class="container landing-view" id="landingView">
+        <h1>Congrats Dishitaaaa!</h1>
+        <button class="gift-button" onclick="openGift()">Open Gift 🎁</button>
+    </div>
+
+    <!-- Message View -->
+    <div class="container message-view" id="messageView">
+        <div class="message-card">
+            <h2>You're going to be an amazing anchor! 🎤</h2>
+            <p>
+                Hey Dishita! You told me the great news and honestly that's amazing. 
+                Getting selected for anchoring itself says a lot about you. 
+                You're going to do great...
+            </p>
+            <p class="italic-text">And if anything comes up... I'm here.</p>
+            <p class="final-text">All the best ✨</p>
+        </div>
+    </div>
+
+    <script>
+        function openGift() {
+            // Confetti effect
+            const duration = 3000;
+            const end = Date.now() + duration;
+            const colors = ['#ec4899', '#f472b6', '#fbcfe8', '#fbbf24', '#f59e0b'];
+
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: { x: 0 },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: { x: 1 },
+                    colors: colors
+                });
+
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+
+            // Switch views
+            setTimeout(() => {
+                document.getElementById('landingView').classList.add('hide');
+                document.getElementById('messageView').classList.add('show');
+            }, 500);
+        }
+    </script>
+</body>
+</html>
